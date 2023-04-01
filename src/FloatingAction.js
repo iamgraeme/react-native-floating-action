@@ -1,5 +1,5 @@
-import React, { Component } from "react"; // eslint-disable-line
-import PropTypes from "prop-types";
+import React, { Component } from 'react'; // eslint-disable-line
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Image,
@@ -8,16 +8,17 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   Platform,
-  Keyboard
-} from "react-native";
+  Keyboard,
+  Text
+} from 'react-native';
 
-import FloatingActionItem from "./FloatingActionItem";
-import AddIcon from "./AddIcon";
+import FloatingActionItem from './FloatingActionItem';
+import AddIcon from './AddIcon';
 
-import { isIphoneX } from "./utils/platform";
-import { getTouchableComponent, getRippleProps } from "./utils/touchable";
+import { isIphoneX } from './utils/platform';
+import { getTouchableComponent, getRippleProps } from './utils/touchable';
 
-const DEVICE_WIDTH = Dimensions.get("window").width;
+const DEVICE_WIDTH = Dimensions.get('window').width;
 
 const DEFAULT_SHADOW_PROPS = {
   shadowOpacity: 0.35,
@@ -25,7 +26,7 @@ const DEFAULT_SHADOW_PROPS = {
     width: 0,
     height: 5
   },
-  shadowColor: "#000000",
+  shadowColor: '#000000',
   shadowRadius: 3
 };
 
@@ -43,9 +44,9 @@ class FloatingAction extends Component {
     );
     this.actionsBottomAnimation = new Animated.Value(
       props.buttonSize +
-      this.distanceToVerticalEdge +
-      props.actionsPaddingTopBottom +
-      props.mainVerticalDistance
+        this.distanceToVerticalEdge +
+        props.actionsPaddingTopBottom +
+        props.mainVerticalDistance
     );
     this.animation = new Animated.Value(0);
     this.actionsAnimation = new Animated.Value(0);
@@ -66,9 +67,9 @@ class FloatingAction extends Component {
 
     if (listenKeyboard) {
       const showEvent =
-        Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+        Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
       const hideEvent =
-        Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
+        Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
       this.keyboardWillShowListener = Keyboard.addListener(
         showEvent,
         this.onKeyboardShow
@@ -85,17 +86,29 @@ class FloatingAction extends Component {
 
     if (prevProps.visible !== visible) {
       if (visible) {
-        this.setState({shouldRender: true});
+        this.setState({ shouldRender: true });
         Animated.parallel([
-          Animated.spring(this.visibleAnimation, { toValue: 0, useNativeDriver: false }),
-          Animated.spring(this.fadeAnimation, { toValue: 1, useNativeDriver: false })
+          Animated.spring(this.visibleAnimation, {
+            toValue: 0,
+            useNativeDriver: false
+          }),
+          Animated.spring(this.fadeAnimation, {
+            toValue: 1,
+            useNativeDriver: false
+          })
         ]).start();
       }
       if (!visible) {
         Animated.parallel([
-          Animated.spring(this.visibleAnimation, { toValue: 1, useNativeDriver: false }),
-          Animated.spring(this.fadeAnimation, { toValue: 0, useNativeDriver: false })
-        ]).start(() => this.setState({shouldRender: false}));
+          Animated.spring(this.visibleAnimation, {
+            toValue: 1,
+            useNativeDriver: false
+          }),
+          Animated.spring(this.fadeAnimation, {
+            toValue: 0,
+            useNativeDriver: false
+          })
+        ]).start(() => this.setState({ shouldRender: false }));
       }
     }
   }
@@ -123,7 +136,7 @@ class FloatingAction extends Component {
       : distanceToEdge.vertical;
   }
 
-  onKeyboardShow = e => {
+  onKeyboardShow = (e) => {
     const { buttonSize, actionsPaddingTopBottom } = this.props;
     const { height } = e.endCoordinates;
 
@@ -154,7 +167,8 @@ class FloatingAction extends Component {
     Animated.parallel([
       Animated.spring(this.actionsBottomAnimation, {
         bounciness: 0,
-        toValue: buttonSize + this.distanceToVerticalEdge + actionsPaddingTopBottom,
+        toValue:
+          buttonSize + this.distanceToVerticalEdge + actionsPaddingTopBottom,
         duration: 250,
         useNativeDriver: false
       }),
@@ -183,7 +197,7 @@ class FloatingAction extends Component {
       overrideWithAction,
       iconWidth,
       iconHeight,
-      iconColor,
+      iconColor
     } = this.props;
 
     if (overrideWithAction) {
@@ -210,15 +224,27 @@ class FloatingAction extends Component {
       );
     }
 
-    return <AddIcon width={iconWidth} height={iconHeight} backgroundColor={iconColor} />;
+    return (
+      <AddIcon
+        width={iconWidth}
+        height={iconHeight}
+        backgroundColor={iconColor}
+      />
+    );
   };
 
   reset = () => {
     const { animated, onClose } = this.props;
 
     if (animated) {
-      Animated.spring(this.animation, { toValue: 0, useNativeDriver: false }).start();
-      Animated.spring(this.actionsAnimation, { toValue: 0, useNativeDriver: false }).start();
+      Animated.spring(this.animation, {
+        toValue: 0,
+        useNativeDriver: false
+      }).start();
+      Animated.spring(this.actionsAnimation, {
+        toValue: 0,
+        useNativeDriver: false
+      }).start();
     }
     this.updateState(
       {
@@ -261,12 +287,18 @@ class FloatingAction extends Component {
     if (!active) {
       if (!floatingIcon) {
         if (animated) {
-          Animated.spring(this.animation, { toValue: 1, useNativeDriver: false }).start();
+          Animated.spring(this.animation, {
+            toValue: 1,
+            useNativeDriver: false
+          }).start();
         }
       }
 
       if (animated) {
-        Animated.spring(this.actionsAnimation, { toValue: 1, useNativeDriver: false }).start();
+        Animated.spring(this.actionsAnimation, {
+          toValue: 1,
+          useNativeDriver: false
+        }).start();
 
         // only execute it for the background to prevent extra calls
         LayoutAnimation.configureNext({
@@ -317,7 +349,7 @@ class FloatingAction extends Component {
     this.reset();
   };
 
-  handlePressItem = itemName => {
+  handlePressItem = (itemName) => {
     const { onPressItem } = this.props;
 
     if (onPressItem) {
@@ -326,6 +358,8 @@ class FloatingAction extends Component {
 
     this.reset();
   };
+
+  renderLabel = (labelText) => <Text style={styles.label}>{labelText}</Text>;
 
   renderMainButton() {
     const {
@@ -357,7 +391,7 @@ class FloatingAction extends Component {
           {
             rotate: this.visibleAnimation.interpolate({
               inputRange: [0, 1],
-              outputRange: ["0deg", "90deg"]
+              outputRange: ['0deg', '90deg']
             })
           },
           {
@@ -374,7 +408,7 @@ class FloatingAction extends Component {
           {
             rotate: this.animation.interpolate({
               inputRange: [0, 1],
-              outputRange: ["0deg", "45deg"]
+              outputRange: ['0deg', '45deg']
             })
           }
         ]
@@ -389,7 +423,7 @@ class FloatingAction extends Component {
       animatedViewStyle = {
         transform: [
           {
-            rotate: "45deg"
+            rotate: '45deg'
           }
         ]
       };
@@ -399,7 +433,7 @@ class FloatingAction extends Component {
       animatedViewStyle = {
         transform: [
           {
-            rotate: "0deg"
+            rotate: '0deg'
           }
         ]
       };
@@ -411,7 +445,7 @@ class FloatingAction extends Component {
       bottom: this.mainBottomAnimation // I need to imporove this to run on native thread and not on JS thread
     };
 
-    if (["left", "right"].indexOf(position) > -1) {
+    if (['left', 'right'].indexOf(position) > -1) {
       propStyles[position] = this.distanceToHorizontalEdge;
     }
 
@@ -421,6 +455,7 @@ class FloatingAction extends Component {
       borderRadius: buttonSize / 2
     };
 
+    const { labelText } = this.props;
     return (
       <Animated.View
         style={[
@@ -444,6 +479,7 @@ class FloatingAction extends Component {
             style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}
           >
             {this.getIcon()}
+            {this.renderLabel(labelText)}
           </Animated.View>
         </Touchable>
       </Animated.View>
@@ -458,7 +494,7 @@ class FloatingAction extends Component {
       distanceToEdge,
       actionsPaddingTopBottom,
       animated,
-      tintColor,
+      tintColor
     } = this.props;
     const { active } = this.state;
 
@@ -499,12 +535,11 @@ class FloatingAction extends Component {
     const sortedActions = actions.sort((a, b) => a.position - b.position);
     return (
       <Animated.View style={actionsStyles} pointerEvents="box-none">
-        {sortedActions.map(action => {
+        {sortedActions.map((action) => {
           const textColor = action.textColor || action.actionsTextColor;
           const textBackground =
             action.textBackground || action.actionsTextBackground;
-          const tintColorIcon =
-            action.tintColor || tintColor || '#fff';
+          const tintColorIcon = action.tintColor || tintColor || '#fff';
 
           return (
             <FloatingActionItem
@@ -551,7 +586,7 @@ class FloatingAction extends Component {
     return (
       <Animated.View
         pointerEvents="box-none"
-        style={[styles.overlay, { backgroundColor: "transparent" }]}
+        style={[styles.overlay, { backgroundColor: 'transparent' }]}
       >
         {active && showBackground && this.renderTappableBackground()}
         {this.renderActions()}
@@ -589,7 +624,8 @@ FloatingAction.propTypes = {
   mainVerticalDistance: PropTypes.number,
   visible: PropTypes.bool,
   overlayColor: PropTypes.string,
-  position: PropTypes.oneOf(["right", "left", "center"]),
+  labelText: PropTypes.string,
+  position: PropTypes.oneOf(['right', 'left', 'center']),
   overrideWithAction: PropTypes.bool, // replace mainAction with first action from actions
   floatingIcon: PropTypes.any,
   showBackground: PropTypes.bool,
@@ -598,6 +634,7 @@ FloatingAction.propTypes = {
   buttonSize: PropTypes.number,
   iconHeight: PropTypes.number,
   iconWidth: PropTypes.number,
+  iconColor: PropTypes.string,
   listenKeyboard: PropTypes.bool,
   dismissKeyboardOnPress: PropTypes.bool,
   shadow: PropTypes.shape({
@@ -623,9 +660,9 @@ FloatingAction.defaultProps = {
   actionsPaddingTopBottom: 8,
   overrideWithAction: false,
   visible: true,
-  color: "#1253bc",
-  overlayColor: "rgba(68, 68, 68, 0.6)",
-  position: "right",
+  color: '#1253bc',
+  overlayColor: 'rgba(68, 68, 68, 0.6)',
+  position: 'right',
   distanceToEdge: 30,
   openOnMount: false,
   showBackground: true,
@@ -640,16 +677,16 @@ FloatingAction.defaultProps = {
 
 const styles = StyleSheet.create({
   actions: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 85,
     zIndex: 10
   },
   rightActions: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     right: -1000 // this magic number will make always disspear the text from screen
   },
   leftActions: {
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
     left: -1000 // this magic number will make always disspear the text from screen
   },
   centerActions: {
@@ -665,7 +702,7 @@ const styles = StyleSheet.create({
     left: DEVICE_WIDTH / 2 - 30
   },
   overlay: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
@@ -674,17 +711,17 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   buttonContainer: {
-    overflow: Platform.OS === "ios" ? "visible" : "hidden",
+    overflow: Platform.OS === 'ios' ? 'visible' : 'hidden',
     zIndex: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     elevation: 5,
-    position: "absolute"
+    position: 'absolute'
   },
   button: {
     zIndex: 3,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   rightButton: {},
   leftButton: {},
@@ -693,8 +730,8 @@ const styles = StyleSheet.create({
   },
   buttonTextContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
