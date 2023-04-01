@@ -452,12 +452,6 @@ class FloatingAction extends Component {
       propStyles[position] = this.distanceToHorizontalEdge;
     }
 
-    const sizeStyle = {
-      width: buttonWidth,
-      height: buttonHeight,
-      borderRadius: borderRadius
-    };
-
     const { labelText } = this.props;
     return (
       <Animated.View
@@ -474,7 +468,7 @@ class FloatingAction extends Component {
       >
         <Touchable
           {...getRippleProps(mainButtonColor)}
-          style={[styles.button, sizeStyle]}
+          style={[{ width: buttonWidth, height: buttonHeight, borderRadius }]}
           activeOpacity={0.85}
           onPress={this.animateButton}
         >
