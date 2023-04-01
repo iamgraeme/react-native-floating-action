@@ -365,7 +365,10 @@ class FloatingAction extends Component {
     const {
       // @deprecated in favor of "color"
       buttonColor, // eslint-disable-line
+      buttonWidth,
       buttonSize,
+      borderRadius,
+      buttonHeight,
       color,
       position,
       overrideWithAction,
@@ -450,9 +453,9 @@ class FloatingAction extends Component {
     }
 
     const sizeStyle = {
-      width: buttonSize,
-      height: buttonSize,
-      borderRadius: buttonSize / 2
+      width: buttonWidth,
+      height: buttonHeight,
+      borderRadius: borderRadius
     };
 
     const { labelText } = this.props;
@@ -479,8 +482,8 @@ class FloatingAction extends Component {
             style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}
           >
             {this.getIcon()}
-            {this.renderLabel(labelText)}
           </Animated.View>
+          {this.renderLabel(labelText)}
         </Touchable>
       </Animated.View>
     );
@@ -631,7 +634,10 @@ FloatingAction.propTypes = {
   showBackground: PropTypes.bool,
   openOnMount: PropTypes.bool,
   actionsPaddingTopBottom: PropTypes.number,
+  buttonWidth: PropTypes.number,
+  buttonHeight: PropTypes.number,
   buttonSize: PropTypes.number,
+  borderRadius: PropTypes.number,
   iconHeight: PropTypes.number,
   iconWidth: PropTypes.number,
   iconColor: PropTypes.string,
