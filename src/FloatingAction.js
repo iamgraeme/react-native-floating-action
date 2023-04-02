@@ -449,7 +449,7 @@ class FloatingAction extends Component {
       propStyles[position] = this.distanceToHorizontalEdge;
     }
 
-    const { labelText } = this.props;
+    const { labelText, iconColor } = this.props;
     return (
       <Animated.View
         style={[
