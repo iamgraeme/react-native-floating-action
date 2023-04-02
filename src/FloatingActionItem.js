@@ -16,21 +16,21 @@ class FloatingActionItem extends Component {
     if (prevProps.active !== active && animated) {
       Animated.spring(this.animation, {
         toValue: active ? 1 : 0,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
     }
   }
 
   get distanceToHorizontalEdge() {
     const { distanceToEdge } = this.props;
-    return typeof distanceToEdge === 'number'
+    return typeof distanceToEdge === "number"
       ? distanceToEdge
       : distanceToEdge.horizontal;
   }
 
   get distanceToVerticalEdge() {
     const { distanceToEdge } = this.props;
-    return typeof distanceToEdge === 'number'
+    return typeof distanceToEdge === "number"
       ? distanceToEdge
       : distanceToEdge.vertical;
   }
@@ -53,7 +53,7 @@ class FloatingActionItem extends Component {
       textStyle,
       textProps,
       textContainerStyle,
-      shadow
+      shadow,
     } = this.props;
 
     if (elevation !== undefined) {
@@ -73,20 +73,20 @@ class FloatingActionItem extends Component {
               backgroundColor: textBackground,
               elevation: textElevation || elevation,
               shadowOffset: {
-                height: textElevation || elevation
-              }
+                height: textElevation || elevation,
+              },
             },
             shadow,
-            textContainerStyle
+            textContainerStyle,
           ]}
         >
           <Text
             style={[
               styles.text,
               {
-                color: textColor
+                color: textColor,
               },
-              textStyle
+              textStyle,
             ]}
             {...textProps}
           >
@@ -115,32 +115,23 @@ class FloatingActionItem extends Component {
       backgroundColor: color,
       width: buttonSize,
       height: buttonSize,
-      borderRadius: buttonSize / 2
+      borderRadius: buttonSize / 2,
     };
 
     return (
-      <View
-        key="button"
-        style={[styles.button, propStyles, shadow]}
-      >
+      <View key="button" style={[styles.button, propStyles, shadow]}>
         {React.isValidElement(icon) ? (
           icon
         ) : (
-          <Image style={[iconStyle, {tintColor: tintColor}]} source={icon} />
+          <Image style={[iconStyle, { tintColor: tintColor }]} source={icon} />
         )}
       </View>
     );
   }
 
   render() {
-    const {
-      position,
-      paddingTopBottom,
-      render,
-      margin,
-      name,
-      animated
-    } = this.props;
+    const { position, paddingTopBottom, render, margin, name, animated } =
+      this.props;
 
     const Touchable = getTouchableComponent(false);
 
@@ -150,8 +141,8 @@ class FloatingActionItem extends Component {
       animatedActionContainerStyle = {
         marginBottom: this.animation.interpolate({
           inputRange: [0, 1],
-          outputRange: [5, 10]
-        })
+          outputRange: [5, 10],
+        }),
       };
     } else {
       animatedActionContainerStyle = { marginBottom: 10 };
@@ -167,7 +158,8 @@ class FloatingActionItem extends Component {
         components.push(this.renderButton());
         components.push(this.renderText());
       }
-      distanceToEdgeActionContainer.paddingLeft = this.distanceToHorizontalEdge + margin;
+      distanceToEdgeActionContainer.paddingLeft =
+        this.distanceToHorizontalEdge + margin;
     } else if (position === "right") {
       if (render) {
         components.push(render({ key: name }));
@@ -175,7 +167,8 @@ class FloatingActionItem extends Component {
         components.push(this.renderText());
         components.push(this.renderButton());
       }
-      distanceToEdgeActionContainer.paddingRight = this.distanceToHorizontalEdge + margin;
+      distanceToEdgeActionContainer.paddingRight =
+        this.distanceToHorizontalEdge + margin;
     } else if (render) {
       components.push(render({ key: name }));
     } else {
@@ -196,8 +189,8 @@ class FloatingActionItem extends Component {
             distanceToEdgeActionContainer,
             {
               paddingTop: paddingTopBottom,
-              paddingBottom: paddingTopBottom
-            }
+              paddingBottom: paddingTopBottom,
+            },
           ]}
         >
           {components}
@@ -223,10 +216,10 @@ FloatingActionItem.propTypes = {
     shadowOpacity: PropTypes.number,
     shadowOffset: PropTypes.shape({
       width: PropTypes.number,
-      height: PropTypes.number
+      height: PropTypes.number,
     }),
     shadowColor: PropTypes.string,
-    shadowRadius: PropTypes.number
+    shadowRadius: PropTypes.number,
   }),
   textElevation: PropTypes.number,
   // not modified by user
@@ -236,18 +229,18 @@ FloatingActionItem.propTypes = {
     PropTypes.number,
     PropTypes.shape({
       vertical: PropTypes.number,
-      horizontal: PropTypes.number
-    })
+      horizontal: PropTypes.number,
+    }),
   ]),
   paddingTopBottom: PropTypes.number, // modified by parent property "actionsPaddingTopBottom"
   onPress: PropTypes.func,
   render: PropTypes.func,
   margin: PropTypes.number,
-  animated: PropTypes.bool
+  animated: PropTypes.bool,
 };
 
 FloatingActionItem.defaultProps = {
-  tintColor: '#fff',
+  tintColor: "#fff",
   color: "#1253bc",
   distanceToEdge: 30,
   buttonSize: 40,
@@ -259,59 +252,59 @@ FloatingActionItem.defaultProps = {
     shadowOpacity: 0.35,
     shadowOffset: {
       width: 0,
-      height: 5
+      height: 5,
     },
     shadowColor: "#000000",
-    shadowRadius: 3
-  }
+    shadowRadius: 3,
+  },
 };
 
 const styles = StyleSheet.create({
   container: {
     elevation: 0,
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   actionContainer: {
     elevation: 0,
     flex: 1,
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     paddingLeft: 0,
-    paddingRight: 0
+    paddingRight: 0,
   },
   textContainer: {
     paddingHorizontal: 8,
     elevation: 5,
     borderRadius: 4,
-    height: 22
+    height: 22,
   },
   leftTextContainer: {
-    marginLeft: 14
+    marginLeft: 14,
   },
   rightTextContainer: {
-    marginRight: 14
+    marginRight: 14,
   },
   text: {
     fontSize: 14,
-    lineHeight: 20
+    lineHeight: 20,
   },
   button: {
     alignItems: "center",
     justifyContent: "center",
-    elevation: 5
+    elevation: 5,
   },
   iconLogo: {
     resizeMode: "cover",
     width: 40,
     height: 40,
-    borderRadius: 20
+    borderRadius: 20,
   },
   icon: {
     resizeMode: "contain",
     width: 20,
-    height: 20
-  }
+    height: 20,
+  },
 });
 
 export default FloatingActionItem;

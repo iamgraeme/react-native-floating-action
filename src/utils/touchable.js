@@ -1,7 +1,7 @@
 import {
   Platform,
   TouchableOpacity,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
 } from "react-native";
 
 import { shadeColor } from "./color";
@@ -21,7 +21,7 @@ export function getRippleProps(color, useNativeFeedback = true) {
     Platform.Version >= 21
   ) {
     return {
-      background: TouchableNativeFeedback.Ripple(shadeColor(color, -30), true)
+      background: TouchableNativeFeedback.Ripple(shadeColor(color, -30), true),
     };
   }
   return {};

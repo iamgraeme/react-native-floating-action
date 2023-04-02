@@ -3,8 +3,12 @@ export function shadeColor(color, percent) {
   let G;
   let B;
 
-  if (color.indexOf('rgb') === 0) {
-    [R, G, B] = color.replace(/^(rgb|rgba)\(/, '').replace(/\)$/, '').replace(/\s/g, '').split(',');
+  if (color.indexOf("rgb") === 0) {
+    [R, G, B] = color
+      .replace(/^(rgb|rgba)\(/, "")
+      .replace(/\)$/, "")
+      .replace(/\s/g, "")
+      .split(",");
   } else {
     R = parseInt(color.substring(1, 3), 16);
     G = parseInt(color.substring(3, 5), 16);
