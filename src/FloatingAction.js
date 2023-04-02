@@ -359,8 +359,12 @@ class FloatingAction extends Component {
     this.reset();
   };
 
-  renderLabel = (labelText) => <Text style={styles.label}>{labelText}</Text>;
+  renderLabel = (itemName) => {
+    const {iconColor} = this.props;
 
+    return <Text style={[styles.label, iconColor]}>{labelText}</Text>;
+  };
+  
   renderMainButton() {
     const {
       // @deprecated in favor of "color"
@@ -709,6 +713,10 @@ const styles = StyleSheet.create({
   centerActionsVisible: {
     left: DEVICE_WIDTH / 2 - 30
   },
+  label:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
   overlay: {
     position: 'absolute',
     bottom: 0,
