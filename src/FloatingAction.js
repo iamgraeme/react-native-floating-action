@@ -457,7 +457,6 @@ class FloatingAction extends Component {
       <Animated.View
         style={[
           styles.buttonContainer,
-          sizeStyle,
           styles[`${position}Button`],
           propStyles,
           animatedVisibleView,
