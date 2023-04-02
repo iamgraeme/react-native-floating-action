@@ -460,6 +460,7 @@ class FloatingAction extends Component {
           styles[`${position}Button`],
           propStyles,
           animatedVisibleView,
+          borderRadius,
           this.getShadow()
         ]}
         accessible
@@ -467,7 +468,15 @@ class FloatingAction extends Component {
       >
         <Touchable
           {...getRippleProps(mainButtonColor)}
-          style={[{ width: buttonWidth, height: buttonHeight, borderRadius }]}
+          style={[
+            {
+              width: buttonWidth,
+              height: buttonHeight,
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }
+          ]}
           activeOpacity={0.85}
           onPress={this.animateButton}
         >
