@@ -359,12 +359,12 @@ class FloatingAction extends Component {
     this.reset();
   };
 
-  renderLabel = (itemName) => {
+  renderLabel = (labelText) => {
     const {iconColor} = this.props;
 
-    return <Text style={[styles.label, iconColor]}>{labelText}</Text>;
+    return <Text style={[styles.label, {color: iconColor}]}>{labelText}</Text>;
   };
-  
+
   renderMainButton() {
     const {
       // @deprecated in favor of "color"
