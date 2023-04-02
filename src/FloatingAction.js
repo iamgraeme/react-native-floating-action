@@ -472,7 +472,7 @@ class FloatingAction extends Component {
           onPress={this.animateButton}
         >
           <Animated.View
-            style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}
+            style={[styles.buttonTextContainer, animatedViewStyle]}
           >
             {this.getIcon()}
           </Animated.View>
