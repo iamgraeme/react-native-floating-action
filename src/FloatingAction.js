@@ -359,18 +359,11 @@ class FloatingAction extends Component {
     this.reset();
   };
 
-  renderLabel = (labelText) => {
-    const {iconColor} = this.props;
-
-    return <Text style={[styles.label, {color: iconColor}]}>{labelText}</Text>;
-  };
-
   renderMainButton() {
     const {
       // @deprecated in favor of "color"
       buttonColor, // eslint-disable-line
       buttonWidth,
-      buttonSize,
       borderRadius,
       buttonHeight,
       color,
@@ -478,6 +471,7 @@ class FloatingAction extends Component {
               height: buttonHeight,
               alignItems: 'center',
               flexDirection: 'row',
+              borderRadius: borderRadius,
               justifyContent: 'space-between'
             }
           ]}
@@ -489,7 +483,7 @@ class FloatingAction extends Component {
           >
             {this.getIcon()}
           </Animated.View>
-          {this.renderLabel(labelText)}
+          <Text style={[styles.label, { color: iconColor }]}>{labelText}</Text>
         </Touchable>
       </Animated.View>
     );
@@ -713,10 +707,10 @@ const styles = StyleSheet.create({
   centerActionsVisible: {
     left: DEVICE_WIDTH / 2 - 30
   },
-  label:{
+  label: {
     fontSize: 16,
     fontWeight: 'bold'
-  }
+  },
   overlay: {
     position: 'absolute',
     bottom: 0,
@@ -745,7 +739,6 @@ const styles = StyleSheet.create({
     left: DEVICE_WIDTH / 2 - 28
   },
   buttonTextContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   }

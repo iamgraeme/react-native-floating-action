@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { View, StyleSheet } from "react-native";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { View, StyleSheet } from 'react-native';
 
 class AddIcon extends PureComponent {
   render() {
@@ -23,16 +23,16 @@ AddIcon.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   vertical: {
     width: 2,
-    position: "absolute"
+    position: 'absolute'
   },
   horizontal: {
     height: 2,
-    position: "absolute"
+    position: 'absolute'
   }
 });
 
